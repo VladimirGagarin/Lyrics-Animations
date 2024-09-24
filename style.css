@@ -1,0 +1,576 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #202020;
+    color: deepskyblue;
+    font-family: 'Arial', sans-serif;
+    min-height: 100vh;
+}
+
+html, body {
+    height: 100%; /* Ensure the body and html take up the full height of the viewport */
+    margin: 0;
+    padding: 0;
+}
+
+
+header {
+    background-color: #282828; /* Slightly lighter dark for contrast */
+    padding: 10px; /* Reduced padding */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* A subtle shadow effect */
+    width: 100%;
+    min-height: 40px; /* Reduced min-height */
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100; /* Ensure it stays above other elements */
+    position: fixed;
+    flex-direction: column;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%; /* Adjusted to fit the header height */
+}
+
+.left {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: flex-start;
+    width: 60%;
+    height: 100%;
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    width: 40%;
+    height: 100%;
+    background-color: transparent;
+}
+.logo{
+    cursor: pointer;
+}
+
+.logo img {
+    width: 60px; /* Reduced size for the logo */
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.title h1 {
+    font-size: 1.5rem; /* Reduced font size */
+    color: cyan;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adds depth to the text */
+    margin-bottom: 5px; /* Reduced margin */
+}
+
+.title p {
+    font-size: 0.8rem; /* Reduced font size */
+    color: #bbbbbb; /* Softer color for the subtitle */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.title p:last-child{
+    color: cyan;
+}
+
+/* For a hover effect on the title */
+.title h1:hover {
+    color: cyan;
+    text-shadow: 2px 2px 10px cyan;
+    transition: 0.3s;
+}
+
+.audio-controls {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.audio-controls span {
+    font-size: 24px; /* Reduced font size */
+    margin: 10px auto; /* Adjusted margin */
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 5px 10px; /* Reduced padding */
+    border: 2px solid transparent;
+}
+
+.audio-controls span:hover {
+    border-color: aliceblue;
+    color: #0056b3;
+}
+
+.audio-controls span.playing {
+    background-color: aliceblue;
+    color: #0056b3;
+}
+
+.progress-truck {
+    display: flex;
+    width: 100%;
+    height: 4px;
+    margin-top: 10px; /* Adjusted margin */
+    background-color: #333;
+    cursor: pointer;
+}
+
+.progress-bar {
+    background-color: deepskyblue;
+    width: 0;
+    height: 100%;
+}
+
+
+/* Media Queries for Small Screens */
+@media (max-width: 800px) {
+    header {
+        padding: 5px; /* Further reduced padding */
+        min-height: 50px; /* Further reduced min-height */
+    }
+
+    .logo img {
+        width: 30px; /* Further reduced size for the logo */
+        height: 30px;
+    }
+
+    .title h1 {
+        font-size: 12px; /* Further reduced font size */
+    }
+
+    .title p {
+        font-size: 0.5rem; /* Further reduced font size */
+    }
+
+    .audio-controls span {
+        font-size: 16px; /* Further reduced font size */
+        padding: 2px; /* Further reduced padding */
+    }
+
+    .progress-truck {
+        margin-top: 5px; /* Further adjusted margin */
+    }
+}
+
+/* Collapsed header styles */
+header.collapse {
+    min-height: 30px; /* Collapse height */
+    padding: 5px; /* Reduce padding */
+    flex-direction: row; /* Change flex direction to row */
+    justify-content: flex-start;
+}
+
+header.collapse .logo img {
+    width: 40px; /* Reduce logo size */
+    height: 40px;
+}
+
+header.collapse .title h1, 
+header.collapse .title p, 
+header.collapse .audio-controls {
+    display: none; /* Hide these when collapsed */
+}
+
+header.collapse .progress-truck {
+    margin-top: 0;
+    height: 2px; /* Reduce the height of the progress bar */
+}
+
+header.collapse .right {
+    justify-content: flex-end; /* Move content to the right */
+}
+
+
+/*---------------------------------------------------------------------------------------------------------------*/
+main {
+    width: 100%;
+    height: 100%; 
+    display: flex;
+    justify-content: center; 
+}
+
+.container {
+    color: white; /* You can add styles for the container here */
+    width: 80%;
+    height: 100%;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    align-items: center;
+    margin-top: 10px;
+    
+}
+
+.container.fullscreen {
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+.container.fullscreen header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.container.fullscreen .progress-truck {
+    height: 6px; /* Larger progress bar for fullscreen */
+    background-color: #282828;
+}
+
+
+.welcome-message{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #202020;
+    border: 1px solid deepskyblue;
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: deepskyblue;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+
+.welcome-message h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: cyan; /* Golden for the compass theme */
+}
+
+.welcome-message p {
+    font-size: 1.2em;
+    line-height: 1.5;
+    margin: 10px 0;
+    font-style: italic; /* Add a slight emphasis to the text */
+}
+
+.welcome-message .image-div{
+    width: 300px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: myAnim 5s ease 0s 1 normal forwards;
+}
+
+@keyframes myAnim {
+	0% {
+		transform: rotate(0);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.image-div img{
+    width: 100%;
+    height: 100%;
+}
+
+.logo.playing img{
+    
+    animation: rotateNeedle 2s infinite linear;
+}
+
+@keyframes rotateNeedle {
+    0% {
+		transform: rotate(0);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+/* Media Query for Small Screens (mobile, tablets) */
+@media (max-width: 800px) {
+    /* Adjust container size and layout */
+    .container {
+        width: 95%;
+        height: auto;
+        margin-top: 5px;
+        padding: 10px;
+    }
+
+    .container.fullscreen {
+        width: 100%;
+        height: 100vh;
+    }
+
+    /* Adjust welcome message layout */
+    .welcome-message {
+        padding: 10px;
+        width: 100%;
+        height: auto;
+        font-size: 0.9em; /* Reduce text size slightly */
+    }
+
+    .welcome-message h2 {
+        font-size: 1.5em; /* Adjust font size */
+        margin-bottom: 5px;
+    }
+
+    .welcome-message p {
+        font-size: 1em; /* Adjust font size for readability on smaller screens */
+        margin: 5px 0;
+    }
+
+    /* Adjust image size for smaller screens */
+    .welcome-message .image-div {
+        width: 200px; /* Reduce size for smaller screens */
+        height: 200px;
+    }
+
+    .image-div img {
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Fullscreen adjustments */
+    .container.fullscreen header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    .progress-truck {
+        height: 4px; /* Slightly smaller for mobile */
+    }
+}
+
+.norwegian-message, .english-message {
+    margin-bottom: 20px; /* Space between the sections */
+    width: 100%;
+}
+
+.welcome-message .norwegian, .welcome-message .english {
+    margin: 10px 0;
+    font-size: 1.2em;
+}
+
+
+.song-div {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #202020;
+    border: 1px solid deepskyblue;
+    color: deepskyblue;
+    border-radius: 10px;
+    flex-direction: column;
+    margin: 20px 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('logo3.png');
+    background-size: cover; /* Ensures the image covers the entire element */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    position: relative; /* Required for the ::before element */
+    animation: myAnim2 2s ease 0s 1 reverse forwards;
+    overflow: hidden; /* Hide any overflowing content */
+}
+
+.song-div::before {
+    content: ''; /* Required to create a pseudo-element */
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Darker semi-transparent background */
+    z-index: 1; /* Make sure this stays below the content */
+    border-radius: 10px; /* Match the border radius of .song-div */
+}
+
+.norwegian-lyrics, .english-lyrics {
+    width: 100%; /* Adjust the width as needed */
+    display: none;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    text-align: center;
+}
+
+.time-div {
+    position: absolute;
+    background-color: #202020;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    pointer-events: none; /* Ensure it doesn't interfere with mouse events */
+    z-index: 1000; /* Ensure it stays on top */
+}
+
+
+@keyframes myAnim2 {
+	0% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+
+	100% {
+		opacity: 0;
+		transform: translateX(-250px);
+	}
+}
+
+.norwegian-lyrics p, .english-lyrics p {
+    margin: 5px 0;
+    font-size: 2.9em;
+    display: block;
+    animation: myentrance 2s ease 0s 1 normal forwards;
+    
+}
+
+@keyframes myentrance {
+	0% {
+		opacity: 0;
+		transform: rotateX(100deg);
+		transform-origin: bottom;
+	}
+
+	100% {
+		opacity: 1;
+		transform: rotateX(0);
+		transform-origin: bottom;
+	}
+}
+
+.norwegian-lyrics p.exit, .english-lyrics p.exit{
+    animation: myexit 2s ease 0s 1 reverse forwards;
+}
+
+@keyframes myexit {
+	0% {
+		opacity: 0;
+		transform: rotateX(-100deg);
+		transform-origin: top;
+	}
+
+	100% {
+		opacity: 1;
+		transform: rotateX(0deg);
+		transform-origin: top;
+	}
+}
+
+/* Media Query for Small Screens (mobile, tablets) */
+@media (max-width: 800px) {
+    .song-div {
+        padding: 10px; /* Reduce padding */
+        margin: 10px 0;
+        height: 80vh; /* Allow dynamic height for small screens */
+        background-size: cover;
+    }
+
+    .norwegian-lyrics p, .english-lyrics p {
+        font-size: 1.2em; /* Reduce font size for readability on small screens */
+        margin: 3px 0;
+    }
+
+    .time-div {
+        padding: 3px; /* Reduce padding on the time div */
+        font-size: 0.9em; /* Reduce font size */
+    }
+
+    .song-div::before {
+        background-color: rgba(0, 0, 0, 0.7); /* Slightly less opacity for better visibility */
+    }
+
+    /* Ensure text fits within the viewport */
+    .norwegian-lyrics, .english-lyrics {
+        padding: 5px;
+        text-align: center;
+        font-size: 1.2em; /* Adjust font size for small screens */
+    }
+
+    /* Adjust animation for smaller screens */
+    @keyframes myAnim2 {
+        0% {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        100% {
+            opacity: 0;
+            transform: translateX(-150px); /* Adjust animation distance for smaller screens */
+        }
+    }
+}
+
+/* General Overlay Styles */
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+    z-index: 1000; /* Ensure it stays on top */
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Video Container */
+#video-container {
+    position: relative;
+    width: 80%;
+    height: 60%;
+    max-width: 800px;
+    background-color: #202020;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Close Button Styles */
+#close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 16px;
+    z-index: 1001;
+}
+
+#close-btn:hover {
+    background-color: darkred;
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
